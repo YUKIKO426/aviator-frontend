@@ -1,0 +1,293 @@
+.wallet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+}
+
+.wallet-modal {
+  background: #13131f;
+  border: 1px solid #2a2a4a;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 460px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+
+  .wallet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: #0f0f1a;
+    border-bottom: 1px solid #2a2a4a;
+    flex-shrink: 0;
+
+    .wallet-title { color: #fff; font-size: 15px; font-weight: 700; }
+    .wallet-balance {
+      color: #aaa; font-size: 13px;
+      span { color: #4ade80; font-weight: 700; }
+    }
+    .wallet-close {
+      background: none; border: none; color: #666; font-size: 22px; cursor: pointer;
+      &:hover { color: #fff; }
+    }
+  }
+
+  .wallet-tabs {
+    display: flex;
+    border-bottom: 1px solid #2a2a4a;
+    flex-shrink: 0;
+    .wallet-tab {
+      flex: 1; background: none; border: none; color: #666;
+      padding: 12px 8px; font-size: 12px; cursor: pointer;
+      border-bottom: 2px solid transparent; transition: all 0.2s;
+      &:hover { color: #fff; }
+      &.active { color: #e50539; border-bottom-color: #e50539; }
+    }
+  }
+
+  .wallet-msg {
+    margin: 10px 16px 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    flex-shrink: 0;
+    &.success { background: rgba(74,222,128,0.1); border: 1px solid #4ade80; color: #4ade80; }
+    &.error   { background: rgba(229,5,57,0.1);   border: 1px solid #e50539; color: #ff6b6b; }
+    &.info    { background: rgba(96,165,250,0.1);  border: 1px solid #60a5fa; color: #60a5fa; }
+  }
+
+  .wallet-form {
+    padding: 16px;
+    overflow-y: auto;
+    &::-webkit-scrollbar { width: 3px; }
+    &::-webkit-scrollbar-thumb { background: #2a2a4a; }
+
+    .deposit-info {
+      p { color: #888; font-size: 12px; margin: 0 0 12px; line-height: 1.5; }
+    }
+
+    /* UPI Box */
+    .upi-box {
+      display: flex;
+      gap: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid #2a2a4a;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 16px;
+      align-items: center;
+
+      .qr-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 8px;
+        flex-shrink: 0;
+        background: #fff;
+      }
+
+      .qr-placeholder {
+        width: 100px;
+        height: 100px;
+        border: 2px dashed #333;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        .qr-icon { font-size: 28px; }
+        .qr-text { color: #666; font-size: 11px; margin-top: 4px; }
+        .qr-sub  { color: #444; font-size: 9px; text-align: center; margin-top: 2px; }
+      }
+
+      .upi-details {
+        flex: 1;
+        .upi-label { color: #666; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .upi-id-row {
+          display: flex; align-items: center; gap: 8px; margin: 6px 0;
+          .upi-id { color: #fff; font-size: 14px; font-weight: 700; word-break: break-all; }
+          .copy-btn {
+            background: rgba(229,5,57,0.15); border: 1px solid rgba(229,5,57,0.3);
+            color: #e50539; padding: 3px 10px; border-radius: 6px;
+            font-size: 11px; cursor: pointer; white-space: nowrap;
+            &:hover { background: rgba(229,5,57,0.25); }
+          }
+        }
+        .upi-name { color: #888; font-size: 12px; }
+      }
+    }
+
+    .upi-pay-btn {
+      display: block;
+      text-align: center;
+      background: rgba(96,165,250,0.1);
+      border: 1px solid rgba(96,165,250,0.3);
+      color: #60a5fa;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-bottom: 12px;
+      transition: all 0.2s;
+      &:hover { background: rgba(96,165,250,0.2); }
+    }
+
+    /* Step 2 */
+    .step2-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+      .back-btn {
+        background: none; border: 1px solid #333; color: #888;
+        padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer;
+        &:hover { border-color: #555; color: #fff; }
+      }
+      .step2-title { color: #fff; font-weight: 700; font-size: 15px; }
+    }
+
+    .step2-info {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid #2a2a4a;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      .step2-amount { color: #aaa; font-size: 13px; margin-bottom: 6px; strong { color: #4ade80; } }
+      p { color: #777; font-size: 12px; margin: 0; line-height: 1.5; }
+    }
+
+    .utr-help {
+      background: rgba(251,191,36,0.06);
+      border: 1px solid rgba(251,191,36,0.2);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      color: #fbbf24;
+      font-size: 12px;
+      strong { display: block; margin-bottom: 6px; }
+      ul { margin: 0; padding-left: 16px; li { margin-bottom: 3px; line-height: 1.5; } }
+    }
+
+    /* Withdraw */
+    .withdraw-balance {
+      background: rgba(74,222,128,0.06);
+      border: 1px solid rgba(74,222,128,0.2);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #aaa;
+      font-size: 13px;
+      margin-bottom: 14px;
+      strong { color: #4ade80; }
+    }
+
+    .withdraw-note {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #888;
+      font-size: 12px;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    /* Fields */
+    .wallet-field {
+      margin-bottom: 14px;
+      label { display: block; color: #aaa; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+      input {
+        width: 100%;
+        background: #0f0f1a;
+        border: 1px solid #2a2a4a;
+        border-radius: 8px;
+        padding: 11px 14px;
+        color: #fff;
+        font-size: 14px;
+        outline: none;
+        box-sizing: border-box;
+        margin-top: 6px;
+        &:focus { border-color: #e50539; }
+        &::placeholder { color: #444; }
+      }
+    }
+
+    .quick-amounts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+      .quick-btn {
+        background: #0f0f1a;
+        border: 1px solid #2a2a4a;
+        color: #aaa;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        &:hover, &.active { border-color: #e50539; color: #e50539; background: rgba(229,5,57,0.08); }
+      }
+    }
+
+    .wallet-action-btn {
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #fff;
+      transition: opacity 0.2s;
+      &.deposit  { background: linear-gradient(135deg, #4ade80, #22c55e); color: #000; }
+      &.withdraw { background: linear-gradient(135deg, #e50539, #c0022e); }
+      &:disabled { opacity: 0.6; cursor: not-allowed; }
+      &:hover:not(:disabled) { opacity: 0.9; }
+    }
+  }
+
+  /* History */
+  .wallet-history {
+    padding: 12px 16px;
+    overflow-y: auto;
+    &::-webkit-scrollbar { width: 3px; }
+    &::-webkit-scrollbar-thumb { background: #2a2a4a; }
+
+    .hist-section-title {
+      color: #666; font-size: 10px; text-transform: uppercase;
+      letter-spacing: 0.5px; margin: 8px 0 6px;
+    }
+
+    .no-tx { color: #555; text-align: center; padding: 30px 0; font-size: 13px; }
+
+    .tx-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+
+      .tx-left { display: flex; align-items: center; gap: 10px;
+        .tx-icon { font-size: 18px; }
+        .tx-note { color: #ccc; font-size: 12px; }
+        .tx-date { color: #555; font-size: 10px; margin-top: 2px; }
+      }
+
+      .tx-right { text-align: right;
+        .tx-amount { font-size: 14px; font-weight: 700;
+          &.pos { color: #4ade80; } &.neg { color: #e50539; }
+        }
+        .tx-status { font-size: 10px; margin-top: 2px; text-transform: capitalize;
+          &.completed { color: #4ade80; }
+          &.pending   { color: #fbbf24; }
+          &.rejected, &.refunded { color: #e50539; }
+          &.approved  { color: #4ade80; }
+        }
+      }
+    }
+  }
+}

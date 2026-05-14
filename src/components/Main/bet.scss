@@ -1,0 +1,552 @@
+/* ══════════════════════════════════════════
+   AVIATOR — BET CONTROL — PREMIUM REDESIGN
+   ══════════════════════════════════════════ */
+
+.bet-control {
+  flex: 1;
+  background: #0f0f1c;
+  border: 1px solid #1e1e36;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  font-family: 'Segoe UI', sans-serif;
+  min-width: 0;
+
+  /* Subtle top glow line */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(229,5,57,0.5), transparent);
+  }
+
+  .controls {
+    padding: 10px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+  }
+
+  /* ── Add/Remove second panel button ── */
+  .sec-hand-btn {
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 900;
+    z-index: 10;
+    transition: all 0.2s;
+
+    &.add {
+      background: rgba(74,222,128,0.15);
+      border: 1px solid rgba(74,222,128,0.3);
+      color: #4ade80;
+      &::after { content: '+'; }
+      &:hover { background: rgba(74,222,128,0.3); }
+    }
+    &.minus {
+      background: rgba(229,5,57,0.15);
+      border: 1px solid rgba(229,5,57,0.3);
+      color: #e50539;
+      &::after { content: '×'; }
+      &:hover { background: rgba(229,5,57,0.3); }
+    }
+  }
+
+  /* ── Bet / Auto tab switcher ── */
+  .navigation {
+    .navigation-switcher {
+      display: flex;
+      background: #080812;
+      border-radius: 8px;
+      padding: 3px;
+      gap: 2px;
+      width: fit-content;
+
+      button {
+        padding: 5px 16px;
+        border: none;
+        border-radius: 6px;
+        background: transparent;
+        color: #555;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        letter-spacing: 0.3px;
+
+        &:hover { color: #aaa; }
+
+        &.active {
+          background: #1e1e36;
+          color: #fff;
+          box-shadow: 0 1px 6px rgba(0,0,0,0.4);
+        }
+      }
+    }
+  }
+
+  /* ── First row: amount + bet button ── */
+  .first-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex: 1;
+  }
+
+  .bet-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* ── Amount spinner ── */
+  .bet-spinner {
+    .spinner {
+      display: flex;
+      align-items: center;
+      background: #080812;
+      border: 1px solid #1e1e36;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+      &:not(.disabled):hover { border-color: #2e2e50; }
+      &.disabled { opacity: 0.6; }
+
+      .buttons {
+        flex-shrink: 0;
+        button {
+          width: 34px; height: 38px;
+          background: none; border: none;
+          cursor: pointer;
+          display: flex; align-items: center; justify-content: center;
+          color: #888;
+          font-size: 18px;
+          transition: all 0.15s;
+
+          &.minus::after { content: '−'; }
+          &.plus::after  { content: '+'; }
+          &:hover { color: #fff; background: rgba(255,255,255,0.05); }
+          &:active { transform: scale(0.9); }
+        }
+      }
+
+      .input {
+        flex: 1;
+        input {
+          width: 100%;
+          background: none;
+          border: none;
+          outline: none;
+          color: #fff;
+          font-size: 16px;
+          font-weight: 700;
+          text-align: center;
+          padding: 8px 0;
+          font-family: 'Courier New', monospace;
+          &::-webkit-inner-spin-button,
+          &::-webkit-outer-spin-button { -webkit-appearance: none; }
+        }
+      }
+    }
+  }
+
+  /* ── Quick amount buttons ── */
+  .bet-opt-list {
+    display: flex;
+    gap: 4px;
+
+    .bet-opt {
+      flex: 1;
+      background: #080812;
+      border: 1px solid #1e1e36;
+      border-radius: 6px;
+      color: #888;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 2px;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
+
+      &:hover {
+        border-color: #e50539;
+        color: #e50539;
+        background: rgba(229,5,57,0.06);
+      }
+      &.disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+      span { display: block; }
+    }
+  }
+
+  /* ── Main action buttons ── */
+  .buttons-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    min-width: 130px;
+
+    .btn-tooltip {
+      font-size: 9px;
+      color: #fbbf24;
+      text-align: center;
+      padding: 2px 0;
+      letter-spacing: 0.3px;
+    }
+  }
+
+  /* BET button */
+  .btn-success {
+    width: 100%;
+    padding: 0 10px;
+    height: 72px;
+    background: linear-gradient(160deg, #1ea83a, #157a29);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(21,122,41,0.4);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+      transition: left 0.5s;
+    }
+    &:hover::before { left: 150%; }
+    &:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(21,122,41,0.5); }
+    &:active { transform: translateY(0); }
+
+    span {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      label {
+        cursor: pointer;
+        &:first-child {
+          font-size: 11px; font-weight: 800; color: rgba(255,255,255,0.8);
+          letter-spacing: 2px; text-transform: uppercase;
+        }
+      }
+      .amount {
+        display: flex; align-items: baseline; gap: 3px;
+        span:first-child {
+          font-size: 20px; font-weight: 900; color: #fff;
+          font-family: 'Courier New', monospace;
+        }
+        .currency { font-size: 10px; color: rgba(255,255,255,0.6); font-weight: 600; }
+      }
+    }
+  }
+
+  /* CASHOUT button */
+  .btn-waiting {
+    width: 100%;
+    padding: 0 10px;
+    height: 72px;
+    background: linear-gradient(160deg, #d4780a, #a85c06);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(212,120,10,0.4);
+    animation: cashoutPulse 1s ease-in-out infinite;
+
+    &:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(212,120,10,0.6); }
+
+    span {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      label {
+        cursor: pointer;
+        &:first-child {
+          font-size: 11px; font-weight: 800; color: rgba(255,255,255,0.8);
+          letter-spacing: 2px; text-transform: uppercase;
+        }
+      }
+      .amount {
+        display: flex; align-items: baseline; gap: 3px;
+        span:first-child {
+          font-size: 20px; font-weight: 900; color: #fff;
+          font-family: 'Courier New', monospace;
+        }
+        .currency { font-size: 10px; color: rgba(255,255,255,0.6); }
+      }
+    }
+  }
+
+  @keyframes cashoutPulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(212,120,10,0.4); }
+    50%       { box-shadow: 0 4px 30px rgba(212,120,10,0.7); }
+  }
+
+  /* WAITING / CANCEL button */
+  .btn-danger {
+    width: 100%;
+    height: 72px;
+    background: linear-gradient(160deg, #8a0a1e, #6b0717);
+    border: 1px solid rgba(229,5,57,0.3);
+    border-radius: 12px;
+    cursor: pointer;
+    color: #ff6b6b;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    &:hover { background: linear-gradient(160deg, #a50c24, #8a0a1e); }
+
+    label { cursor: pointer; font-size: 13px; font-weight: 800; letter-spacing: 2px; }
+
+    &.h-\[70\%\] { height: 72px; }
+  }
+
+  /* ── Separator ── */
+  .border-line {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #1e1e36, transparent);
+    margin: 2px 0;
+  }
+
+  /* ── Auto section ── */
+  .second-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .auto-bet-wrapper {
+    .auto-play-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+
+      &.btn-primary {
+        background: rgba(96,165,250,0.12);
+        border: 1px solid rgba(96,165,250,0.3);
+        color: #60a5fa;
+        &:hover { background: rgba(96,165,250,0.2); }
+      }
+      &.btn-danger {
+        background: rgba(229,5,57,0.12);
+        border: 1px solid rgba(229,5,57,0.3);
+        color: #e50539;
+        height: auto; font-size: 14px; font-weight: 900;
+        min-width: 40px;
+        animation: cashoutPulse 1s infinite;
+      }
+    }
+  }
+
+  .cashout-block {
+    flex: 1;
+    .cashout-switcher {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      .label { color: #888; font-size: 11px; font-weight: 600; }
+    }
+
+    .cashout-snipper-wrapper {
+      margin-top: 6px;
+      .cashout-snipper {
+        .snipper {
+          display: flex; align-items: center; gap: 4px;
+          background: #080812;
+          border: 1px solid #1e1e36;
+          border-radius: 8px;
+          padding: 4px 8px;
+          &.disabled { opacity: 0.4; }
+
+          .input input {
+            background: none; border: none; outline: none;
+            color: #fff; font-size: 14px; font-weight: 700;
+            width: 60px; text-align: center;
+            font-family: 'Courier New', monospace;
+            &::-webkit-inner-spin-button { -webkit-appearance: none; }
+          }
+          .text { color: #666; font-size: 13px; font-weight: 700; }
+        }
+      }
+    }
+  }
+
+  /* Toggle switch */
+  .input-switch {
+    width: 36px; height: 20px;
+    background: #e50539;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s;
+    flex-shrink: 0;
+
+    &.off { background: #2a2a4a; }
+
+    .oval {
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 16px; height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+    &:not(.off) .oval { transform: translateX(16px); }
+  }
+
+  /* ── AUTO PLAY MODAL ── */
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+
+    .back {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+    }
+
+    .modal-dialog {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin: 16px;
+
+      .modal-content {
+        background: #13131f;
+        border: 1px solid #2a2a4a;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+      }
+
+      .modal-header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 16px 20px;
+        background: #0f0f1a;
+        border-bottom: 1px solid #2a2a4a;
+        span { color: #fff; font-weight: 700; font-size: 15px; }
+        .close {
+          background: none; border: none; color: #666;
+          font-size: 20px; cursor: pointer; padding: 0;
+          &:hover { color: #fff; }
+          span { font-size: 18px; }
+        }
+      }
+
+      .modal-body {
+        padding: 16px 20px;
+
+        .content-part {
+          display: flex; align-items: center; gap: 10px;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(255,255,255,0.05);
+
+          &.content-part-1 { flex-direction: column; align-items: flex-start; }
+
+          span {
+            color: #aaa; font-size: 13px;
+            &.title { flex: 1; }
+          }
+
+          .rounds-wrap {
+            display: flex; gap: 8px; width: 100%;
+            .btn-secondary {
+              flex: 1; padding: 8px 4px;
+              background: #0f0f1a;
+              border: 1px solid #2a2a4a;
+              border-radius: 8px;
+              color: #888; font-size: 13px; font-weight: 700;
+              cursor: pointer; transition: all 0.15s;
+              &:hover, &.onClick {
+                border-color: #e50539; color: #e50539;
+                background: rgba(229,5,57,0.08);
+              }
+            }
+          }
+
+          .m-spinner {
+            display: flex; align-items: center;
+            background: #0f0f1a;
+            border: 1px solid #2a2a4a;
+            border-radius: 8px;
+            overflow: hidden;
+            &.disabled { opacity: 0.4; }
+
+            .buttons button {
+              width: 28px; height: 32px;
+              background: none; border: none;
+              cursor: pointer; color: #888;
+              &.minus::after { content: '−'; }
+              &.plus::after  { content: '+'; }
+              &:hover { color: #fff; }
+            }
+            .input input {
+              background: none; border: none; outline: none;
+              color: #fff; font-size: 13px; font-weight: 700;
+              width: 60px; text-align: center;
+              padding: 6px 0;
+              &::-webkit-inner-spin-button { -webkit-appearance: none; }
+            }
+          }
+        }
+      }
+
+      .modal-footer {
+        padding: 14px 20px;
+        border-top: 1px solid #2a2a4a;
+        .btns-wrapper {
+          display: flex; gap: 10px;
+          .reset-btn, .start-btn {
+            flex: 1; padding: 11px;
+            border: none; border-radius: 10px;
+            font-size: 14px; font-weight: 700;
+            cursor: pointer; transition: all 0.2s;
+          }
+          .reset-btn {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid #2a2a4a;
+            color: #aaa;
+            &:hover { background: rgba(255,255,255,0.1); color: #fff; }
+          }
+          .start-btn {
+            background: linear-gradient(135deg, #1ea83a, #157a29);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(21,122,41,0.4);
+            &:hover { opacity: 0.9; }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .bet-control {
+    .btn-success, .btn-waiting, .btn-danger { height: 60px; }
+    .btn-success span .amount span:first-child,
+    .btn-waiting span .amount span:first-child { font-size: 16px; }
+    .buttons-block { min-width: 110px; }
+  }
+}
