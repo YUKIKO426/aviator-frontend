@@ -4,11 +4,8 @@
 
 ## �‍💻 Author
 
-**Akash Mahla** - Full Stack Developer & Game Creator
+**MR GLAXIER** - Full Stack Developer & Game Creator
 
- [GitHub](https://github.com/akashmahlax)
- [Linkedin](https://linkedin/in/akashmahlax)
- 
 ## 🌟 Features
 
 ### 🎮 Game Mechanics
@@ -105,15 +102,15 @@ Each game round is provably fair, ensuring that the outcome is random and cannot
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/akashmahlax/aviator-crash/issues).
+Contributions, issues, and feature requests are welcome!
 
 ## 📝 License
 
-This project is created by **Akash Mahla**. All rights reserved.
+This project is created by **MR GLAXIER**. All rights reserved.
 
 ## 🙏 Acknowledgments
 
-- Built with passion by Akash Mahla
+- Built with passion by MR GLAXIER
 - Thanks to the React and Node.js communities for their amazing tools
 - Special thanks to all beta testers and contributors
 
@@ -121,11 +118,9 @@ This project is created by **Akash Mahla**. All rights reserved.
 
 ### 💻 About the Developer
 
-**Akash Mahla** is a passionate full-stack developer specializing in modern web technologies. With expertise in React, Node.js, and real-time applications, Akash creates engaging and innovative gaming experiences.
+**MR GLAXIER** is a passionate full-stack developer specializing in modern web technologies. With expertise in React, Node.js, and real-time applications, GLAXIER creates engaging and innovative gaming experiences.
 
 **Skills**: React.js, TypeScript, Node.js, MongoDB, Socket.IO, Game Development
-
-**Contact**:  [GitHub](https://github.com/akashmahlax)
 
 ---
 
